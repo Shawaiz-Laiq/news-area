@@ -66,6 +66,10 @@ export default class NavBar extends Component {
                                         <button className="btn btn-outline-success" type="submit">Search</button>
                                     </form>
                                 </li>
+                                {this.props.username === "" ?  " " :
+                                <li>
+                                    <span onClick={this.props.onNewsClick}  style={{ cursor: 'pointer' }}>Add News</span>
+                                </li> }
                             </ul>
                         </div>
                     </div>

@@ -92,17 +92,43 @@ export default class News extends Component {
     }
   
   render() {
-
+ const { newsarea } = this.props;
+ const allNews = [
+  ...this.state.article,
+  ...this.props.newsList
+];
+//console.log(allNews)
 
     return (
       <div>
-        {this.state.article.map((element, indx)=> {
-            return(
-                <div key={indx}>
-                <AddNews author={element.author} title={element.title} description={element.description} url={element.url} urlToImage={element.urlToImage} publishedAt={element.publishedAt} content={element.content}  />
-                </div>
-            )
-        })}
+        {newsarea === true
+  ? this.props.newsList.map((element, indx) => (
+      <div key={indx}>
+        <AddNews
+          author={element.author}
+          title={element.title}
+          description={element.description}
+          url={element.url}
+          urlToImage={element.urlToImage}
+          publishedAt={element.publishedAt}
+          content={element.content}
+        />
+      </div>
+    ))
+  : this.state.article.map((element, indx) => (
+      <div key={indx}>
+        <AddNews
+          author={element.author}
+          title={element.title}
+          description={element.description}
+          url={element.url}
+          urlToImage={element.urlToImage}
+          publishedAt={element.publishedAt}
+          content={element.content}
+        />
+      </div>
+    ))
+}
       </div>
     );
   }

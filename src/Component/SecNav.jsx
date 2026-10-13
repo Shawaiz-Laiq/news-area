@@ -5,17 +5,25 @@ export default class Secnav extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeTab: 'all'
+      activeTab: 'all',
+      newsarea: false
     };
-  }
+  };
 
   handleTabClick = (tabName) => {
     this.setState({ activeTab: tabName });
 
-  }
+  };
+  handleNewsArea = () => {
+    this.setState({ newsarea: true });
+  };
+  handleAll = () => {
+    this.setState({ newsarea: false });
+  };
 
   render() {
     const { activeTab } = this.state;
+    
 
     return (
       <div className="container ">
@@ -26,7 +34,7 @@ export default class Secnav extends Component {
             <span 
               className={`nav-link ${activeTab === 'all' ? 'active font-weight-bold' : ''}`}
               style={{ cursor: 'pointer', color: activeTab === 'all' ? '#0d6efd' : '#5f6368' }}
-              onClick={() => this.handleTabClick('all')}
+              onClick={() => {this.handleTabClick('all'); this.handleAll()}}
             >
               All
             </span>
@@ -34,21 +42,21 @@ export default class Secnav extends Component {
 
           <li className="nav-item">
             <span 
-              className={`nav-link ${activeTab === 'images' ? 'active' : ''}`}
-              style={{ cursor: 'pointer', color: activeTab === 'images' ? '#0d6efd' : '#5f6368' }}
-              onClick={() => this.handleTabClick('images')}
+              className={`nav-link ${activeTab === 'pakistan' ? 'active' : ''}`}
+              style={{ cursor: 'pointer', color: activeTab === 'pakistan' ? '#0d6efd' : '#5f6368' }}
+              onClick={() => {this.handleTabClick('pakistan'); this.handleAll()}}
             >
-              Images
+              Pakistan
             </span>
           </li>
 
           <li className="nav-item">
             <span 
-              className={`nav-link ${activeTab === 'videos' ? 'active' : ''}`}
-              style={{ cursor: 'pointer', color: activeTab === 'videos' ? '#0d6efd' : '#5f6368' }}
-              onClick={() => this.handleTabClick('videos')}
+              className={`nav-link ${activeTab === 'sports' ? 'active' : ''}`}
+              style={{ cursor: 'pointer', color: activeTab === 'sports' ? '#0d6efd' : '#5f6368' }}
+              onClick={() => {this.handleTabClick('sports'); this.handleAll()}}
             >
-              Videos
+              Sports
             </span>
           </li>
 
@@ -61,8 +69,19 @@ export default class Secnav extends Component {
               News
             </span>
           </li>
+          <li className="nav-item">
+            <span 
+              className={`nav-link ${activeTab === 'newsarea' ? 'active' : ''}`}
+              style={{ cursor: 'pointer', color: activeTab === 'newsarea' ? '#0d6efd' : '#5f6368' }}
+              onClick={() => {
+                this.handleTabClick('newsarea');
+                this.handleNewsArea();
+            }}>
+              News Area
+            </span>
+          </li>
         </ul>
-        <News/>
+        <News newsarea={this.state.newsarea}  newsList={this.props.newsList} />
       </div>
     )
   }

@@ -16,6 +16,7 @@ export default class NewsFeed extends Component {
   };
    
   render() {
+
    let {author, title, description, url, urlToImage, publishedAt, content} = this.props
    
    return (
