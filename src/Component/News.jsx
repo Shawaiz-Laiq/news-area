@@ -93,12 +93,6 @@ export default class News extends Component {
   
   render() {
  const { newsarea } = this.props;
- const allNews = [
-  ...this.state.article,
-  ...this.props.newsList
-];
-//console.log(allNews)
-
     return (
       <div>
         {newsarea === true

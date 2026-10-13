@@ -1,6 +1,6 @@
 
 import React, { Component } from "react";
-import NewsFeed from "./AddNews";
+
 
 export default class AddNewsOn extends Component {
   constructor(props) {
