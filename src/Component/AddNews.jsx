@@ -42,7 +42,7 @@ export default class NewsFeed extends Component {
 
           {this.state.hidden && (
             <p>
-              {content} <a href={url} target="_blank">click here to read on website</a>
+              {content} <a href={url} target="_blank" rel="noreferrer">click here to read on website</a>
             </p>
           )}
             </div>
