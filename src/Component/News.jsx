@@ -96,9 +96,11 @@ export default class News extends Component {
 
     return (
       <div>
-        {this.state.article.map((element)=> {
+        {this.state.article.map((element, indx)=> {
             return(
+                <div key={indx}>
                 <AddNews author={element.author} title={element.title} description={element.description} url={element.url} urlToImage={element.urlToImage} publishedAt={element.publishedAt} content={element.content}  />
+                </div>
             )
         })}
       </div>
