@@ -51,7 +51,7 @@ export default class NavBar extends Component {
                                             <li><hr className="dropdown-divider"/></li>
                                             <li>
                                                 <span className="dropdown-item" onClick={() => {
-                                                    this.setState({ isOpen: false }); // Logout par dropdown band karein
+                                                    this.setState({ isOpen: false }); 
                                                     this.props.onLogoutClick();
                                                 }} style={{ cursor: 'pointer' }}>
                                                     LogOut

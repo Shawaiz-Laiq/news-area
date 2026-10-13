@@ -43,7 +43,7 @@ export default class Login extends Component {
             </div>
             <div className="mb-3">
                 <label htmlFor="exampleInputEmail1" className="form-label text-white">Email address</label>
-                <input type="email" className="form-control" id="exampleInputEmail1" required ref={this.emailInput} />
+                <input type="email" className="form-control" id="exampleInputEmail1" required ref={this.emailInput} maxLength={"50"} />
             </div>
             <div className="mb-3">
                 <label htmlFor="exampleInputPassword1" className="form-label text-white" >Password</label>
