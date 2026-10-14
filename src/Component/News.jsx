@@ -115,11 +115,20 @@ export default class News extends Component {
         this.fetchNews(search);
       }
     }
+    
     fetchNews = async (search) => {
       this.setState({ loading: true });
+      const apiKeys = [
+        "714aa75b92694038adcb1c7d9a49cdb9",
+        "9ce9f7399e7945d1b1d85aab263efa84",
+        "01243f899d0a4e9096205f7f6b7a8dbb"
+ 
+      ].filter(Boolean);
+
       try {
-        const query = search === "all" ? "all" : search;
-        let url =`https://newsapi.org/v2/everything?q=${encodeURIComponent(query)}&language=en&from=2026-09-14&sortBy=publishedAt&apiKey=714aa75b92694038adcb1c7d9a49cdb9`;
+        for (const key of apiKeys) {
+           const query = search === "all" ? "all" : search;
+        let url =`https://newsapi.org/v2/everything?q=${encodeURIComponent(query)}&language=en&from=2026-09-14&sortBy=publishedAt&apiKey=${key}`;
         const response = await fetch(url);
         const data = await response.json();
         if (data.status === "ok") {
@@ -127,6 +136,8 @@ export default class News extends Component {
         } else {
           this.setState({ loading: false });
         }
+        }
+       
       } catch (error) {
         this.setState({ loading: false });
       }

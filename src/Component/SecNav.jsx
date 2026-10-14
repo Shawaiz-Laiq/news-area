@@ -65,9 +65,9 @@ export default class Secnav extends Component {
 
           <li className="nav-item">
             <span 
-              className={`nav-link ${activeTab === 'news' ? 'active' : ''}`}
-              style={{ cursor: 'pointer', color: activeTab === 'news' ? '#0d6efd' : '#5f6368' }}
-              onClick={() => this.handleTabClick('news')}
+              className={`nav-link ${activeTab === 'politics' ? 'active' : ''}`}
+              style={{ cursor: 'pointer', color: activeTab === 'politics' ? '#0d6efd' : '#5f6368' }}
+              onClick={() => this.handleTabClick('politics')}
             >
               News
             </span>
