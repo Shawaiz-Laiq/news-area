@@ -84,46 +84,99 @@ export default class News extends Component {
   ];
 
     constructor() {
-        super();
-        this.state = {
-            article : this.article,
-            loading: false
-        }
+      super();
+      this.state = {
+        article : this.article,
+        loading: false,
+        search: "all",
+      }
     }
+
+    componentDidMount() {
+      const search = this.props.scr || this.props.secondNav || "pakistan";
+
+      this.setState({ search });
+      this.fetchNews(search);
+    }
+
+    componentDidUpdate(prevProps) {
+      let search;
+
+      if (prevProps.secondNav !== this.props.secondNav) {
+        search = this.props.secondNav || "pakistan";
+      } else if (prevProps.scr !== this.props.scr) {
+        search = this.props.scr || "pakistan";
+      } else {
+        return;
+      }
+
+      if (search !== this.state.search) {
+        this.setState({ search });
+        this.fetchNews(search);
+      }
+    }
+    fetchNews = async (search) => {
+      this.setState({ loading: true });
+      try {
+        const query = search === "all" ? "all" : search;
+        let url =`https://newsapi.org/v2/everything?q=${encodeURIComponent(query)}&language=en&from=2026-09-14&sortBy=publishedAt&apiKey=714aa75b92694038adcb1c7d9a49cdb9`;
+        const response = await fetch(url);
+        const data = await response.json();
+        if (data.status === "ok") {
+          this.setState({ article: data.articles || [], loading: false, });
+        } else {
+          this.setState({ loading: false });
+        }
+      } catch (error) {
+        this.setState({ loading: false });
+      }
+    };
+      
   
-  render() {
- const { newsarea } = this.props;
-    return (
-      <div>
-        {newsarea === true
-  ? this.props.newsList.map((element, indx) => (
-      <div key={indx}>
-        <AddNews
-          author={element.author}
-          title={element.title}
-          description={element.description}
-          url={element.url}
-          urlToImage={element.urlToImage}
-          publishedAt={element.publishedAt}
-          content={element.content}
-        />
-      </div>
-    ))
-  : this.state.article.map((element, indx) => (
-      <div key={indx}>
-        <AddNews
-          author={element.author}
-          title={element.title}
-          description={element.description}
-          url={element.url}
-          urlToImage={element.urlToImage}
-          publishedAt={element.publishedAt}
-          content={element.content}
-        />
-      </div>
-    ))
-}
-      </div>
-    );
-  }
+    render() {
+      const { newsarea, newsList = [] } = this.props;
+      const { article = [] } = this.state;
+      const displayedNews = newsarea ? newsList : article;   
+      return (
+        <div>
+          <div>{this.state.loading=== false ?  "" :<div className="text-center my-5">
+            <div
+              className="spinner-border text-primary"
+              role="status"
+              aria-label="Loading news"
+            ></div>
+            <p className="mt-2">Loading news...</p>
+          </div> } </div>
+          {displayedNews.map((element, indx) => (
+            <div key={indx}>
+              <AddNews
+                author={element.author}
+                title={element.title}
+                description={element.description}
+                url={element.url}
+                urlToImage={element.urlToImage?.startsWith( "https" || "https://biztoc.")
+                          ? element.urlToImage : "https://taz.de/picture/8795549/1200/42288301.jpeg" }
+                publishedAt={element.publishedAt}
+                content={element.content}
+              />
+            </div>
+          ))}
+
+          {this.props.secondNav === "newsarea" ? 
+          <div className="alert alert-info text-center my-4" role="alert">
+              <h5>Your News Is Not Public Yet!</h5>
+              <p className="mb-0">
+                You can log in and add your own news, which will be displayed here for you only.
+                Other users cannot see it yet. We're working on making your news visible to everyone soon!
+              </p>
+          </div> : <div>{displayedNews.length === 0 ? <div className="text-center my-5">
+              <h4>Your Result Not Found 😕</h4>
+              <p className="text-muted">
+                Sorry, no news found. Try searching with different keywords.
+                <h2>{this.props.scr || this.props.secondNav}</h2> 
+              </p>
+            </div> : ""}</div>}          
+        </div>
+      );
+    }
 }

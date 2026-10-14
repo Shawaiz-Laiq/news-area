@@ -12,13 +12,19 @@ function App() {
   const [username, setUsername] = useState("");
   const [useremail, setUseremail] = useState("");
   const [newsList, setNewsList] = useState([]);
+  const [search, setsearch] = useState("")
 
   return (
     <div>
       <div style={{ filter: showLogin || addnews ? "blur(5px)" : "none", pointerEvents: showLogin ? "none" : "auto" }}>
-        <NavBar onLoginClick={() => setShowLogin(true)} onNewsClick={() => setaddnews(true)} onLogoutClick={()=> {setUsername("") ; setShowLogin(false); setUseremail("")}} username={username} useremail={useremail} /> 
+        <NavBar onLoginClick={() => setShowLogin(true)} 
+                onNewsClick={() => setaddnews(true)}
+                onsearch={(ser)=> setsearch(ser)} 
+                onLogoutClick={()=> {setUsername("") ; 
+                setShowLogin(false); setUseremail("")}} 
+                username={username} useremail={useremail} /> 
         <Time/>
-        {addnews === true || showLogin=== true ? "":<SecNav newsList={newsList}/> }   
+        {addnews === true || showLogin=== true ? "":<SecNav newsList={newsList} scr={search}/> }   
       </div>
       {showLogin && (
         <div   style={{

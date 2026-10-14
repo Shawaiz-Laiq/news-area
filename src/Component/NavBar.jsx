@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 
 export default class NavBar extends Component {
+     search = React.createRef();
     constructor(props) {
         super(props);
         this.state = {
@@ -10,6 +11,11 @@ export default class NavBar extends Component {
 
     toggleDropdown = () => {
         this.setState(prevState => ({ isOpen: !prevState.isOpen }));
+    }
+    handlesubmit = (e) =>{
+        e.preventDefault(); 
+        const Searchon = this.search.current.value;
+        this.props.onsearch(Searchon); 
     }
 
     render() {
@@ -61,8 +67,8 @@ export default class NavBar extends Component {
                                 </li>}
                                 
                                 <li className="nav-item mx-auto" style={{ minWidth: '300px' }}>
-                                    <form className="d-flex" role="search">
-                                        <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
+                                    <form className="d-flex" role="search" onSubmit={this.handlesubmit}>
+                                        <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" ref={this.search}/>
                                         <button className="btn btn-outline-success" type="submit">Search</button>
                                     </form>
                                 </li>

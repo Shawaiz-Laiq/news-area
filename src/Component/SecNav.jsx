@@ -6,16 +6,19 @@ export default class Secnav extends Component {
     super(props);
     this.state = {
       activeTab: 'all',
-      newsarea: false
+      newsarea: false,
+      secondNav: "all",
     };
   };
 
   handleTabClick = (tabName) => {
     this.setState({ activeTab: tabName });
+    this.setState({ secondNav: tabName })
 
   };
   handleNewsArea = () => {
     this.setState({ newsarea: true });
+    
   };
   handleAll = () => {
     this.setState({ newsarea: false });
@@ -81,7 +84,7 @@ export default class Secnav extends Component {
             </span>
           </li>
         </ul>
-        <News newsarea={this.state.newsarea}  newsList={this.props.newsList} />
+        <News newsarea={this.state.newsarea} secondNav={this.state.secondNav}  newsList={this.props.newsList} scr={this.props.scr}/>
       </div>
     )
   }

@@ -24,10 +24,14 @@ export default class NewsFeed extends Component {
           <div className="row my-3">
             <div className="col-12 col-md-3">  
                 <img
-                src={urlToImage}
-                alt=" "
+                src={urlToImage  || "/default-news.jpg"}
+                alt={title || "News image"}
+                loading="lazy"
                 className="img-fluid w-100"
                 style={{ height: "150px" , objectFit: "cover", backgroundColor:"black"}}
+                onError={(e) => {
+                e.currentTarget.onerror = null;
+                e.currentTarget.src = "/default-news.jpg";}}
                 />
             </div>
             <div className="col-12 col-md-9">
@@ -48,7 +52,7 @@ export default class NewsFeed extends Component {
           )}
             </div>
             <div className='d-flex justify-content-between'>
-                <h6 className="my-1">Autho {author}</h6>
+                <h6 className="my-1">Author {author}</h6>
                 <p>{publishedAt}</p>
                 
 
