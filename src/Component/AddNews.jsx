@@ -23,16 +23,17 @@ export default class NewsFeed extends Component {
           
           <div className="row my-3">
             <div className="col-12 col-md-3">  
-                <img
-                src={urlToImage  || "/default-news.jpg"}
+                <a href={urlToImage} target="_blank" rel="noopener noreferrer"><img
+                src={urlToImage  || "https://thediplomat.com/wp-content/uploads/2026/03/sizes/td-story-s-2/thediplomat_2026-03-16-211614.jpg"}
                 alt={"1" || "News image"}
                 loading="lazy"
+                url={urlToImage}
                 className="img-fluid w-100"
-                style={{ height: "150px" , objectFit: "cover", backgroundColor:"black"}}
+                style={{ height: "150px" , objectFit: "cover", backgroundColor:"black", }}
                 onError={(e) => {
                 e.currentTarget.onerror = null;
                 e.currentTarget.src ="https://thediplomat.com/wp-content/uploads/2026/03/sizes/td-story-s-2/thediplomat_2026-03-16-211614.jpg";}}
-                />
+                /></a>
             </div>
             <div className="col-12 col-md-9">
                 <h1 style={{fontSize:"2rem"}}>{title}</h1>

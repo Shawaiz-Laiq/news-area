@@ -29,11 +29,12 @@ export default class Secnav extends Component {
     
 
     return (
+      <>
       <div className="container ">
 
-        <ul className="nav nav-underline justify-content-start border-bottom pb-1">
+        <ul className="nav nav-underline justify-content-start pb-1 position-fixed  bg-white" style={{width:"100%", paddingTop: "30px", top:"50px"}}>
           
-          <li className="nav-item">
+          <li className="nav-item ">
             <span 
               className={`nav-link ${activeTab === 'all' ? 'active font-weight-bold' : ''}`}
               style={{ cursor: 'pointer', color: activeTab === 'all' ? '#0d6efd' : '#5f6368' }}
@@ -67,7 +68,7 @@ export default class Secnav extends Component {
             <span 
               className={`nav-link ${activeTab === 'politics' ? 'active' : ''}`}
               style={{ cursor: 'pointer', color: activeTab === 'politics' ? '#0d6efd' : '#5f6368' }}
-              onClick={() => this.handleTabClick('politics')}
+              onClick={() => {this.handleTabClick('politics');  this.handleAll() }}
             >
               News
             </span>
@@ -84,8 +85,9 @@ export default class Secnav extends Component {
             </span>
           </li>
         </ul>
+      </div> <div className="container " style={{marginTop:"110px"}}>
         <News newsarea={this.state.newsarea} secondNav={this.state.secondNav}  newsList={this.props.newsList} scr={this.props.scr}/>
-      </div>
+       </div> </>
     )
   }
 }
